@@ -146,7 +146,13 @@ li.c {
   background-color: #B8B8B8;
 }
 div.project {
+  margin-top: 1%;
+  border-radius: 25px;
   text-align: center;
+  background: rgba(0, 0, 0, 0.2);
+  background-size: cover;
+  margin-left: 20%;
+  margin-right: 20%;
 }
 p.project_des {
   margin-left: auto;
