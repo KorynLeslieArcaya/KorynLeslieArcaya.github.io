@@ -145,14 +145,16 @@ ul.clist {
 li.c {
   background-color: #B8B8B8;
 }
+div.projectwrapper{
+  text-align:center;
+}
 div.project {
+  display: inline-block;
   margin-top: 1%;
   border-radius: 25px;
-  text-align: center;
   background: rgba(0, 0, 0, 0.2);
   background-size: cover;
-  margin-left: 20%;
-  margin-right: 20%;
+  width: 600px;
 }
 p.project_des {
   margin-left: auto;
