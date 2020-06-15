@@ -1,0 +1,42 @@
+body {
+	font-family: "Libre Franklin";
+	background-color: #D3D3D3;
+}
+section {
+	margin-top: 1%;
+}
+h2.title {
+	float:left;
+	min-width: 20%;
+	max-width: 20%;
+	word-wrap: break-word;
+	margin:0;
+	text-transform: capitalize;
+}
+h2.blog_header, h3, h4, h5 {
+	margin-left: 25%;
+	margin-right: 5%;
+}
+p, img, div.list {
+	width: 50%;
+	margin:0;
+	word-wrap: break-word;
+	margin-left: 25%;
+	margin-right: 5%;
+}
+a:link {
+	text-decoration: none;
+	color: black;
+	float: right;
+	bottom: 0;
+}
+a:visited {
+	text-decoration-color: none;
+	text-decoration: none;
+	color: black;
+	float: right;
+	bottom:0;
+}
+a:hover {
+	font-size: 24px;
+}

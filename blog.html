@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link href="https://fonts.googleapis.com/css?family=Libre+Baskerville|Libre+Franklin&display=swap" rel="stylesheet">
+		<title>Koryn Leslie-Arcaya</title>
+		<link rel='stylesheet' href='blog.css'>
+	</head>
+	<body>
+		<header><a href="./index.html">Back</a></header>	
+		<section id="expense_tracker_part1_post">
+			<h2 class="title">06/11/2020 &#8226; Expense Tracker Design</h2>
+			<p>One of the first lessons I learned in Introduction to Computer Science was to create a design before starting to code.
+			</p>
+			<h3>Goal</h3>
+			<p>A program that takes in CSV files and displays the amount of money spent on specific categories either by the month or year.</p>
+			<h3>What it needs to do:</h3>
+			<div class="list">
+				<ul>
+					<li>Take in CSV files and parse out the name of what was bought, the date, and the cost.</li>
+					<li>Identify the category that the item belongs to, and add the cost & name to the category.</li>
+					<li>Add the cost & name to the associated month. </li>
+				</ul>
+			</div>
+			<h3>The Objects</h3>
+			<img src="category.png" alt="category object">
+			</br>
+			<img src="month.png" alt="month object">
+			</br>
+			<img src="year.png" alt="year object">
+			<h4>Relationships between objects:</h4>
+			<div class="list">
+				<ul>
+					<li>Year has a Month</li>
+					<li>Month has a Category</li>
+					<li>Categories (subclass) are a Category (parent class)</li>
+					<ul>
+						<li>Categories (the subclasses) include: Groceries, Pet, Home improvement, Entertainment, Bills, Eating out, 1x Expenses, Donations, Material.</li>
+						<li>All contain the same variables and methods as their parent class (Category).
+					</ul>
+				</ul>
+			</div>
+			<h3>The Design Pattern</h3>
+			<p>Design patterns improve the quality of code by helping the outside viewer understand it. Deciding between patterns was harder than expected. Below are the 2 patterns I debated:</p></br>
+			<p>Singleton - Initially, I thought of making this project into a bank account. A single class was going to be created, a “bank” object, and the transactions were going to instantiate a new category instance which would have been added to the month object all added to the bank object. This was abandoned because there was no need for a bank object.</p></br>
+			<p>Factory - I decided on this method because there is a category with categories subclasses that need to be called. The interface calls the correct category of the transaction and the object is created. The category object will then be added to a month object, and the month object will be added to the year object. This will also allow a static variable to be used between each instantiated object of a category preventing the need to go through and add the costs of all the category transactions. </p>
+			<br>
+			<p>Now it's time to code.</p>
+		</section>
+		<section id="guinea_pig_part1_post">
+			<h2 class="title">06/02/2020 &#8226; Guinea Pig Facts Part 1</h2>
+			<p>Envisioned code stack: React frontend, Spring Boot backend, MongoDB database.</p>
+			<br>
+			<p>Recently, I finished a fullstack project called “Oregon COVID-19 Tracker.” That experience has taught me the importance of design, the ability to adapt when a feature isn’t working as intended, and the need to structure the project in the way it is intended to be deployed. For this project using the new skills obtained from the last, I have decided to create another fullstack web application but this time using an opinionated backend with a model-view-controller architecture and enabling user authentication. This is the primary design and will be changed as progress is made and blockings are found. </p>
+
+			<h2 class="blog_header">Design</h2>
+			<h3>User Flow</h3>
+			<p>User goes to landing page '/' &#8594; landing page displays all guinea pig facts that have been submitted to the MongoDB database as a table &#8594; user can navigate to signup OR login &#8594; User now has the ability to add a new fact once logged in</p>
+
+			<h3>Models</h3>
+			<p>{ <br>"userName": "dummy", <br>"password": "password", <br>"role": {<br>&emsp;"role" : "readWrite", <br>&emsp;"db": "facts" <br>}, <br>"contact": {<br>&emsp;"email": "dummy@mail.com", <br>&emsp;"dailyUpdate": "false"<br>}, <br>"factId": [1, 200, 5]<br>}</p>
+			<div class="list">
+				<ul>
+					<li>users</li>
+					<ul>
+						<li>userName: Unique, string, required</li>
+						<li>password: String, required, at least 8 characters</li>
+						<li>role</li>
+						<ul> 
+							<li>read/write privileges  only available for fact collection. Cannot remove facts. </li>
+						</ul>
+						<li>contact</li>
+						<ul> 
+							<li>email: String, required</li>
+							<li>dailyUpdate: Boolean, required</li>
+						</ul>
+						<li>facts</li>
+							<ul>
+								<li>factId</li>
+							</ul>
+					</ul>
+				</ul>
+			</div>
+			<p>{<br>"factId": 1, <br>"factValue": "Guinea Pig babies are called pups.", <br>"dateCreated": "06/02/2020", <br>"approved": false<br>}</p>
+			<div class="list">
+				<ul>
+					<li>fact</li>
+					<ul>
+						<li>factId: Unique key</li>
+						<li>factValue: String</li>
+						<li>dateCreated: Date, default is day fact is submitted</li>
+						<li>approved: Boolean, default is false</li>
+					</ul> 
+				</ul>
+			</div>
+			<h3>Routing</h3>
+			<h4>Frontend</h4>
+			<div class="list">
+				<dl>
+					<dt>/ </dt>
+						<dd>Landing page. Displays all guinea pig facts in a table with fact string and date created. </dd>
+					<dt>/login</dt>
+						<dd>Form with user name and password fields to allow user to login. Goes through sign in process of controller.</dd>
+					<dt>/signup</dt>
+						<dd>Form with user name, password, email, and daily update fields to allow user to create an account. Goes through signup process of controller.</dd> 
+				</dl>
+			</div>
+
+			<h4>Backend</h4>
+			<div class="list">
+				<ul>
+					<li>/api/getFacts</li>
+					<ul>
+						<li>Returns all facts and dates in fact database.</li>
+						<li>GET</li>
+					</ul>
+					<li>/api/createUser</li>
+					<ul>
+						<li>Adds user to database</li>
+						<li>POST</li>
+					</ul>
+					<li>/api/updateUser</li>
+					<ul>
+						<li>Allows user to update the password associated with their account.</li>
+						<li>PUT</li>
+						<li>There will need to be some type of authentication to get to this page.</li>
+					</ul>
+					<li>/api/addFact</li>
+					<ul>
+						<li>Allows user to add facts to the fact collection.</li>
+						<li>POST</li>
+						<li>There will need to be some type of authentication to get to this page.</li>
+					</ul>
+				</ul>
+			</div>
+		</section>
+		<section id="first_post">
+			<h2 class="title">05/28/2020 &#8226; First Post</h2>
+			<p>This blog will be dedicated to discussing projects and general musings regarding the tech world. Hello world!</p>
+		</section>
+	</body>
+</html>
